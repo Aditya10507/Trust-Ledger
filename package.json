@@ -1,0 +1,20 @@
+{
+  "name": "trust-ledger",
+  "version": "1.0.0",
+  "description": "Two LLM agents negotiate; the Buyer learns who to trust through Hindsight memory.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "start:live": "HINDSIGHT_MODE=live node src/server.js",
+    "check-llm": "node scripts/check-llm.js",
+    "check-live": "HINDSIGHT_MODE=live node scripts/check-hindsight.js"
+  },
+  "dependencies": {
+    "@vectorize-io/hindsight-client": "^0.10.1",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

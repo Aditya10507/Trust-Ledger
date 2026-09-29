@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trust Ledger — agents that learn who to trust</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="masthead">
+  <div class="brand">
+    <h1>Trust Ledger</h1>
+    <p class="subtitle">Two AI agents negotiate a real deal. One of them remembers.</p>
+  </div>
+  <div class="badges">
+    <span class="badge" id="memBadge">memory · …</span>
+    <span class="badge" id="llmBadge">agents · …</span>
+  </div>
+</header>
+
+<section class="controls">
+  <div class="control-group">
+    <label for="persona">Seller personality <span class="hint">hidden from the Buyer</span></label>
+    <select id="persona"></select>
+  </div>
+  <label class="check">
+    <input type="checkbox" id="compare" />
+    <span>Compare with a Buyer that has no memory <span class="hint">(changing this restarts the run)</span></span>
+  </label>
+  <div class="buttons">
+    <button id="runRound" class="primary">Run next deal</button>
+    <button id="runFive" class="secondary">Run 5 deals</button>
+    <button id="stopBtn" class="secondary" hidden>Stop after this deal</button>
+    <button id="resetBtn" class="linklike">reset</button>
+  </div>
+</section>
+
+<main class="stage">
+  <section class="room">
+    <div class="room-head">
+      <span class="room-title" id="roomTitle">Negotiation room</span>
+      <div class="chips" id="roundChips"></div>
+    </div>
+    <div class="status" id="statusLine">Ready — run the first deal.</div>
+    <div class="chat" id="chat">
+      <div class="empty-state">The Buyer needs 100 sensors. The Seller wants the order.<br/>Run a deal to watch them negotiate.</div>
+    </div>
+    <div id="dealCard" class="deal-card" hidden></div>
+    <div id="deliveryCard" class="delivery-card" hidden></div>
+  </section>
+
+  <aside class="mind">
+    <div class="panel">
+      <div class="panel-head">Buyer's trust in the Seller</div>
+      <div class="trust-figure">
+        <span id="trustValue">—</span>
+        <span class="trust-of">/ 1.00</span>
+        <span id="trustDelta" class="trust-delta"></span>
+      </div>
+      <div class="gauge"><div id="gaugeFill" class="gauge-fill"></div></div>
+      <svg id="sparkline" viewBox="0 0 240 100" preserveAspectRatio="none"></svg>
+      <div class="sparkline-caption">trust after each deal</div>
+      <div class="stance" id="stanceText">No history yet — the Buyer will negotiate blind.</div>
+      <dl class="meta-rows">
+        <div><dt>Evidence</dt><dd id="evidenceCount">0 deals</dd></div>
+        <div><dt>Confidence</dt><dd id="confidenceValue">0%</dd></div>
+        <div><dt>Really delivers in</dt><dd id="realisticDays">—</dd></div>
+      </dl>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head" id="memoryHead">What the Buyer remembered</div>
+      <div id="memoryBody" class="memory-body"><div class="empty-state small">Nothing yet.</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">Business impact</div>
+      <div id="impactBody"></div>
+    </div>
+  </aside>
+</main>
+
+<section class="memory-feed">
+  <div class="memory-feed-head">
+    <span>Live activity</span>
+    <span class="memory-feed-hint">memory operations and agent calls, as they happen</span>
+  </div>
+  <div id="opsFeed" class="ops-feed"><div class="empty-state small">Nothing yet.</div></div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
